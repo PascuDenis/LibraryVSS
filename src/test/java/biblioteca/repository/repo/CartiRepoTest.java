@@ -2,15 +2,18 @@ package biblioteca.repository.repo;
 
 import biblioteca.model.Carte;
 import biblioteca.repository.repoInterfaces.CartiRepoInterface;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import biblioteca.util.Validator;
 import static org.junit.Assert.*;
 
 public class CartiRepoTest {
+    CartiRepo cartiRepo = new CartiRepo();
+
     public void setUp() {
         List<Carte> carti = new ArrayList<Carte>();
         carti.add(Carte.getCarteFromString("Povesti;Mihai Eminescu,Ion Caragiale,Ion Creanga;1973;Corint;povesti,povestiri"));
@@ -45,6 +48,36 @@ public class CartiRepoTest {
             System.out.println(carte);
         }
     }
+
+    @Test
+    public void adaugaCarteECP(){
+        //Given
+        List<Carte> carteList = cartiRepo.getCarti();
+        int sizeListaCarte = carteList.size();
+
+        //When
+        Carte carteNoua = new Carte();
+        carteNoua.setTitlu("Miau miau");
+        carteNoua.setAnAparitie("1999");
+        carteNoua.setReferenti(Arrays.asList("Ref1", "Ref2", "Ref3"));
+        carteNoua.setCuvinteCheie(Arrays.asList("Cuv1", "Cuv2", "Cuv3"));
+        Assert.assertEquals(true, Validator.isOKString(carteNoua.getTitlu()));
+        Assert.assertEquals(true, Validator.isNumber(carteNoua.getAnAparitie()));
+
+        Carte carteNoua2 = new Carte();
+        carteNoua.setTitlu("123");
+        carteNoua.setAnAparitie("ANA ARE MERE");
+        carteNoua.setReferenti(Arrays.asList("Ref1", "Ref2", "Ref3"));
+        carteNoua.setCuvinteCheie(Arrays.asList("Cuv1", "Cuv2", "Cuv3"));
+        Assert.assertEquals(false, Validator.isOKString(carteNoua2.getTitlu()));
+        Assert.assertEquals(false, Validator.isNumber(carteNoua2.getAnAparitie()));
+
+        cartiRepo.adaugaCarte(carteNoua);
+
+        //Then
+        Assert.assertEquals(sizeListaCarte+1,cartiRepo.getCarti().size());
+    }
+
 
     //F02
     @Test
