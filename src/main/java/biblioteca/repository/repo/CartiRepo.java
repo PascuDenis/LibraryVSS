@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CartiRepo implements CartiRepoInterface {
 	
-	private String file = "C:\\Users\\tiberiu.neagu\\Work\\vss\\LibraryVSS\\src\\main\\resources\\cartiBD.txt";
+	private String file = "D:\\VVSS\\Lab3\\LibraryVSS\\src\\main\\resources\\cartiBD.txt";
 	
 	public CartiRepo(){
 		URL location = CartiRepo.class.getProtectionDomain().getCodeSource().getLocation();
@@ -96,7 +96,7 @@ public class CartiRepo implements CartiRepoInterface {
 		List<Carte> lc = getCarti();
 		List<Carte> lca = new ArrayList<Carte>();
 		for(Carte c:lc){
-			if(c.getAnAparitie().equals(an) == false){
+			if(c.getAnAparitie().equals(an) == true){
 				lca.add(c);
 			}
 		}

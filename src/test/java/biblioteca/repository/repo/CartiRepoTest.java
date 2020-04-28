@@ -5,6 +5,7 @@ import biblioteca.repository.repoInterfaces.CartiRepoInterface;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -234,5 +235,41 @@ public class CartiRepoTest {
     //F03
     @Test
     public void getCartiOrdonateDinAnul() {
+
+        Carte carte1 = new Carte();
+        carte1.setTitlu("Poezii");
+        List<String> referenti = new ArrayList<>();
+        referenti.add("Sadoveanu");
+        carte1.setReferenti(referenti);
+        carte1.setAnAparitie("1973");
+        List<String> cuvinteCheie = new ArrayList<>();
+        cuvinteCheie.add("Corint");
+        carte1.setCuvinteCheie(cuvinteCheie);
+
+        Carte carte2 = new Carte();
+        carte1.setTitlu("Povesti");
+        referenti = new ArrayList<>();
+        referenti.add("Mihai Eminescu");
+        referenti.add("Ion Caragiale");
+        referenti.add("Ion Creanga");
+        carte1.setReferenti(referenti);
+        carte1.setAnAparitie("1973");
+        cuvinteCheie = new ArrayList<>();
+        cuvinteCheie.add("Corint");
+        carte1.setCuvinteCheie(cuvinteCheie);
+
+        List<Carte> cartiTest = new ArrayList<>();
+        cartiTest.add(carte1);
+        cartiTest.add(carte2);
+
+        CartiRepo cartiRepo = new CartiRepo();
+        List<Carte> cartiRezultat1=cartiRepo.getCartiOrdonateDinAnul("1973");
+        List<Carte> cartiRezultat2=cartiRepo.getCartiOrdonateDinAnul("f");
+
+        assertTrue(cartiTest.equals(cartiRezultat1));
+
+        assertFalse(cartiTest.equals(cartiRezultat2));
+
+
     }
 }
