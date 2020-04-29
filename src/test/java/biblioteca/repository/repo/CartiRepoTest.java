@@ -230,6 +230,9 @@ public class CartiRepoTest {
     //F02
     @Test
     public void cautaCarte() {
+        CartiRepo cartiRepo = new CartiRepo();
+        List<Carte> carti = cartiRepo.cautaCarte("enigma");
+//        assertTrue(carti.get(0).getTitlu().equals("Enigma Otiliei"));
     }
 
     //F03
